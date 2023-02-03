@@ -38,6 +38,7 @@ public class Evento {
 		return data;
 	}
 
+
 	public void setData(LocalDate data) throws Exception {
 		// Inserire il controllo che la data non sia già passata 
 		LocalDate now = LocalDate.now();
@@ -64,6 +65,7 @@ public class Evento {
 		if( (data.isBefore(LocalDate.now()) ) || (numeroPostiPrenotati == numeroPostiTotale) ) {
 			throw new Exception("Non è più possibile prenotare per questo evento!");
 		}
+		numeroPostiTotale--;
 		numeroPostiPrenotati++;
 	}
 	
@@ -72,10 +74,10 @@ public class Evento {
 		prenotazioni deve sollevare un’eccezione
 	 */
 	public void disdici() throws Exception {
-		LocalDate now = LocalDate.now();
-		if( (data.isBefore(now)) || (numeroPostiPrenotati == 0) ) {
+		if( (data.isBefore(LocalDate.now()) ) || (numeroPostiPrenotati == 0) ) {
 			throw new Exception("Non è più possibile disdire per questo evento!");
 		}
+		numeroPostiTotale++;
 		numeroPostiPrenotati--;
 	}
 	

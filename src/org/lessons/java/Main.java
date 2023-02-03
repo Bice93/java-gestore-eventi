@@ -54,11 +54,43 @@ public class Main {
 					e.getMessage();
 				}
 			}
-			System.out.println("Numero posi prenotati: " + numeroPrenotazione +
-								"\nPosti ancora disponibili: " + (evento.getNumeroPostiTotale() - numeroPrenotazione));
+			System.out.println("Numero posti prenotati: " + numeroPrenotazione +
+								"\nPosti ancora disponibili: " + (evento.getNumeroPostiTotale()) );
 			
 		} else {
 			System.out.println("Nessuna prenotazione richiesta! Arrivederci!");
+		}
+		
+		/*
+			* 4. Chiedere all’utente se e quanti posti vuole disdire
+			5. Provare ad effettuare le disdette, implementando opportuni controlli e gestendo
+			eventuali eccezioni
+		 */
+		if(sceltaUtente.equals("si")) {
+			System.out.println("Vuoi disdire delle prenotazioni effettuate?\n* si\n* no");
+			String sceltaDisdettaUtente = s.nextLine();
+			
+			if(sceltaDisdettaUtente.equals("si")) {
+				System.out.println("Quanti posti vuoi disdire?");
+				int numeroDisdette = Integer.parseInt(s.nextLine());
+				if(numeroDisdette == 0) {
+					System.out.println("Numero non valido per la disdetta dei posti");
+					return;
+				}
+				
+				for (int i = 0; i < numeroDisdette; i++) {
+					try {
+						evento.disdici();
+					} catch (Exception e) {
+						e.getMessage();
+					}
+				}
+				System.out.println("Numero posti disdetti: " + numeroDisdette +
+						"\nPosti disponibili: " + (evento.getNumeroPostiTotale()));
+				
+			} else {
+				System.out.println("Nessuna disdetta richiesta! Arrivederci!");
+			}			
 		}
 		
 
