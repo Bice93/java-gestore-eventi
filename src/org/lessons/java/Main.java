@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Scanner s = new Scanner(System.in);
-		
+
 		// Si chiede all’utente di inserire un nuovo evento con tutti i parametri.
 		System.out.println("Inserisci il tuo Evento!\nInserisci il nome dell'evento: ");
 		String titolo = s.nextLine();
@@ -23,16 +23,45 @@ public class Main {
 		Evento evento = null;
 		try {
 			evento = new Evento(titolo, data, numeroPostiTotale);
+			System.out.println(evento.toString());
 		} catch (Exception e) {
 			System.out.println("Non è possibile inserire l'evento! " + e.getMessage());
-		} finally {
-			s.close();
+			return;
+		} 
+		
+		
+		/*
+		 * 	Dopo che l’evento è stato istanziato, chiedere all’utente se e quante prenotazioni
+			vuole fare e provare ad effettuarle, implementando opportuni controlli e gestendo
+			eventuali eccezioni.
+		 */
+
+		System.out.println("Vuoi fare delle prenotazioni all'evento?\n* si\n* no");
+		String sceltaUtente = s.nextLine();
+		
+		if(sceltaUtente.equals("si")) {
+			System.out.println("Quanti posti vuoi prenotare?");
+			int numeroPrenotazione = Integer.parseInt(s.nextLine());
+			if(numeroPrenotazione == 0) {
+				System.out.println("Numero non valido per la prenotazione dei posti");
+				return;
+			}
+			
+			for (int i = 0; i < numeroPrenotazione; i++) {
+				try {
+					evento.prenota();
+				} catch (Exception e) {
+					e.getMessage();
+				}
+			}
+			System.out.println("Numero posi prenotati: " + numeroPrenotazione +
+								"\nPosti ancora disponibili: " + (evento.getNumeroPostiTotale() - numeroPrenotazione));
+			
+		} else {
+			System.out.println("Nessuna prenotazione richiesta! Arrivederci!");
 		}
 		
-		System.out.println(evento.toString());
-		
-		
-		
+
 
 	}
 
