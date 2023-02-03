@@ -1,12 +1,15 @@
 package org.lessons.java;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
+		//Milestone 1 e 2
 		Scanner s = new Scanner(System.in);
 
 		// Si chiede all’utente di inserire un nuovo evento con tutti i parametri.
@@ -92,6 +95,21 @@ public class Main {
 				System.out.println("Nessuna disdetta richiesta! Arrivederci!");
 			}			
 		}
+		
+		
+		/*
+		 * 	Milestone 3 
+			Creazione concerto
+		*/
+	
+		Concerto concerto1 = null;
+		try {
+			concerto1 = new Concerto("Campovolo", LocalDate.parse("2023-10-12"), 20, LocalTime.parse("09:00"), BigDecimal.valueOf(10.5780));
+			System.out.println(concerto1.toString());			
+		} catch (Exception e) {
+			System.out.println("Non è possibile inserire l'evento! " + e.getMessage());
+			return;
+		} 
 		
 
 
