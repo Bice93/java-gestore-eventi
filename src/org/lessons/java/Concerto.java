@@ -9,8 +9,8 @@ import java.util.Locale;
 
 public class Concerto extends Evento{
 	// attributi
-	LocalTime ora;
-	BigDecimal prezzo;
+	private LocalTime ora;
+	private BigDecimal prezzo;
 	
 	public Concerto(String titolo, LocalDate data, int numeroPostiToatle, LocalTime ora, BigDecimal prezzo) throws Exception {
 		super(titolo, data, numeroPostiToatle);
