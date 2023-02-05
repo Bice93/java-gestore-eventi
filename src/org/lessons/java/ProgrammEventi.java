@@ -1,8 +1,11 @@
 package org.lessons.java;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class ProgrammEventi {
 	/*
@@ -29,7 +32,7 @@ public class ProgrammEventi {
 	/*
 	 * ● un metodo che restituisce una lista con tutti gli eventi presenti in una certa data
 	 */
-	public List getEventiData(LocalDate data) {
+	public List<Evento> getEventiData(LocalDate data) {
 		List<Evento> eventiData = new ArrayList<>();
 		
 		for (Evento evento : eventi) {
@@ -55,5 +58,24 @@ public class ProgrammEventi {
 		eventi.clear();
 	}
 	
+	/*
+	 * 	● un metodo che restituisce una stringa che mostra il titolo del programma e tutti gli
+		eventi ordinati per data nella forma:
+		○ data1 - titolo1
+		○ data2 - titolo2
+		○ data3 - titolo3
+	 */
+	public String toStringProgramm() {
+		DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("dd/MM/yyyy").withLocale(Locale.ITALIAN);
+		Collections.sort(eventi, new CompareEventDate());
+		String listString = "Programma: " + titolo + "\nEventi presenti: " + numeroEventi() + "\n";
+
+		for (Evento evento : eventi) {
+			listString += "- " + evento.getData().format(formattedDate) + " - " + evento.getTitolo() + "\n";
+		}
+		
+		return listString;	
+	}
 	
 }
+

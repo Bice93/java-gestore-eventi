@@ -111,8 +111,24 @@ public class Main {
 			return;
 		} 
 		
-
-
+		
+		/*
+		 * Milestone 4
+		 */
+		
+		ProgrammEventi events = new ProgrammEventi("Welcome First Program");
+		
+		try {
+			events.addList(new Concerto("Campovolo", LocalDate.parse("2023-10-12"), 2000, LocalTime.parse("09:00"), BigDecimal.valueOf(10.5780)));
+			events.addList(new Concerto("Il festival", LocalDate.parse("2023-08-02"), 1500, LocalTime.parse("19:00"), BigDecimal.valueOf(150.00)));
+			events.addList(new Evento("Mostra Fotografica", LocalDate.parse("2023-09-25"), 30));
+			events.addList(new Evento("Arte in Movimento", LocalDate.parse("2024-12-23"), 60));
+			events.addList(new Evento("Mostra Fotografica Duemila", LocalDate.parse("2023-08-02"), 10));
+		} catch (Exception e) {
+			System.out.println("Errore!");
+		}
+		System.out.println(events.toStringProgramm());
+		System.out.println(events.getEventiData(LocalDate.parse("2023-08-02")));
 	}
 
 }
